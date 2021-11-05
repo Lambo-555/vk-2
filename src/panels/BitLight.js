@@ -8,7 +8,8 @@ const BitLight = props => {
   const [bpsList, setBpsList] = useState([]);
   const [bps, setBps] = useState([false, false, false, false, false, false, false, false]);
   const [user, setUser] = useState(null);
-  const [playStatus, setPlayStatus] = useState(false);
+  const [playStatus, setPlayStatus] = useState(true);
+  const [interval, setInter] = useState(null);
 
   const getBpsList = async () => {
     try {
@@ -30,23 +31,30 @@ const BitLight = props => {
   }, []);
 
   const playHandler = () => {
-    bridge.send("VKWebAppFlashGetInfo")
-        .then(lightData => {
-          console.log('lightData', lightData);
-          if(!lightData.is_available) {}//modal
-        })
-        .catch(err => console.log(err));
-    setPlayStatus(true);
-
-    for(signal of bps) {
-      if(signal) {
-        Math.round(new Date() / 1000)
-      }
+    console.log('playHandler playStatus', playStatus);
+    if (!playStatus) {
+      clearInterval(interval);
+      setInter(null);
     }
 
-    bridge.send("VKWebAppFlashSetLevel", {"level": 1})
+      console.log('playStatus awdawdaw', playStatus);
+    bridge.send('VKWebAppFlashGetInfo')
         .then(flashData => console.log(flashData))
         .catch(error => console.log(error));
+
+    if (!interval) {
+      console.log('playStatus interval', playStatus);
+      let inter = setInterval(() => {
+        if (playStatus) {
+          let secondNow = Math.round(new Date() / 1000) % 8;
+          console.log('secondNow', secondNow, bps[secondNow]);
+          bridge.send("VKWebAppFlashSetLevel", {"level": bps[secondNow] ? 1 : 0})
+              .then(flashData => console.log(flashData))
+              .catch(error => console.log(error));
+        }
+      }, 500);
+      setInter(inter);
+    }
   };
 
   const bitHandler = (e) => {
@@ -61,7 +69,7 @@ const BitLight = props => {
   return (
       <Panel id={props.id}>
         <PanelHeader
-            left={<PanelHeaderBack onClick={props.go} data-to="Main"/>}
+            left={<PanelHeaderBack onClick={props.go} data-to="Menu"/>}
         >
           Space-light BitsPerSecond
         </PanelHeader>
@@ -96,10 +104,13 @@ const BitLight = props => {
                 before={!playStatus ? <Icon28Play/> : <Icon24Stop/>}
                 mode="outline"
                 size="l"
-                onClick={() => playHandler()}
+                onClick={() => {
+                  setPlayStatus(!playStatus);
+                  playHandler();
+                }}
                 stretched
                 style={{marginRight: 0}}
-            >Воспроизвести</Button>
+            >{!playStatus ? 'Остановить' : 'Воспроизвести'}</Button>
           </Div>
           <Div style={{display: 'flex'}}>
             <Button before={<Icon28VinylOutline/>} size="l" stretched style={{marginRight: 0}}>Создать</Button>

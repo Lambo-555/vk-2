@@ -15,7 +15,7 @@ import {
   Card,
   RichCell,
   Avatar,
-  IconButton,
+  IconButton, PanelHeaderBack,
 } from "@vkontakte/vkui";
 import {
   Icon28ListOutline,
@@ -88,7 +88,7 @@ const Main = props => {
 
   return (
       <Panel id={props.id}>
-        <PanelHeader>Space Hand-Shaker</PanelHeader>
+        <PanelHeader left={<PanelHeaderBack onClick={props.go} data-to="Menu"/>}>Space Hand-Shaker</PanelHeader>
         <Group>
           <Div>
             <Headline weight="regular" style={{marginBottom: 16}}>Приложение позволяет жать руку другу дистанционно.
