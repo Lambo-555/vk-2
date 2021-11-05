@@ -113,7 +113,7 @@ const Main = props => {
           <Div style={{display: 'flex'}}>
             <Button stretched onClick={() => sendShakeHandler()}>Отправить
               уведомление {notifStatus && ' еще раз'}</Button>
-            {isShake && <h1>Вы пожали руки</h>}
+            {isShake && <h1>Вы пожали руки</h1>}
           </Div>
           <Div style={{display: 'flex', justifyContent: 'center'}}>
             <Link target="_blank"
