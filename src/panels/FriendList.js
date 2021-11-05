@@ -3,7 +3,7 @@ import {Panel, PanelHeader, PanelHeaderBack, Group, Header} from "@vkontakte/vku
 import bridge from "@vkontakte/vk-bridge";
 import {useEffect} from "react";
 
-const QrCount = props => {
+const FriendList = props => {
   const [qrCount, setQrCount] = useState();
   const getCount = async () => {
     try {
@@ -21,7 +21,7 @@ const QrCount = props => {
   return (
       <Panel id={props.id}>
         <PanelHeader
-            left={<PanelHeaderBack onClick={props.go} data-to="QrMain"/>}
+            left={<PanelHeaderBack onClick={props.go} data-to="Main"/>}
         >
           Количество QR-кодов
         </PanelHeader>
@@ -32,4 +32,4 @@ const QrCount = props => {
   );
 };
 
-export default QrCount;
+export default FriendList;
