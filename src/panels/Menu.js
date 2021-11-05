@@ -9,10 +9,10 @@ const Menu = props => {
         <PanelHeader>Menu</PanelHeader>
         <Group header={<Header mode="secondary">Типы кнопок</Header>}>
           <Div>
-            <Button onClick={props.go} data-to="Main">Бесконтактное рукопожатие</Button>
+            <Button onClick={props.go} data-to="Main">Бесконтактное рукопожатие!</Button>
           </Div>
           <Div>
-            <Button onClick={props.go} data-to="BitLight">Фонарик мелодия</Button>
+            <Button onClick={props.go} data-to="BitLight">Фонарик мелодия!</Button>
           </Div>
           <Div>
             <Button onClick={props.go} data-to="Giroscope">Гироскоп (WIP)</Button>

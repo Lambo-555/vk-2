@@ -46,3 +46,6 @@ const App = () => {
 };
 
 export default App;
+
+
+// env MINI_APPS_ACCESS_TOKEN=a9ef802e4579bd8fb3b1ced259843b53706a98c48d02eef96ba24429323ffa5924dc0cba6c2a6cf36c8c5 yarn deploy

@@ -37,8 +37,8 @@ const Main = props => {
   const [giro, setGiro] = useState(0);
 
   const sendShakeHandler = () => {
-    if(!friendIsOnline) return; //modal bad but ok
-    if(isShake) return; //modal - you make it
+    // if(!friendIsOnline) return; //modal bad but ok
+    if (isShake) return; //modal - you make it
     props.setPopout(<ScreenSpinner size='large'/>);
     bridge.send("VKWebAppAllowNotifications");
     bridge.send("VKWebAppAccelerometerStart", {})
@@ -113,9 +113,10 @@ const Main = props => {
           <Div style={{display: 'flex'}}>
             <Button stretched onClick={() => sendShakeHandler()}>Отправить
               уведомление {notifStatus && ' еще раз'}</Button>
+            {isShake && <h1>Вы пожали руки</h>}
           </Div>
           <Div style={{display: 'flex', justifyContent: 'center'}}>
-            <Link onClick={() => sendShakeHandler()} target="_blank"
+            <Link target="_blank"
                   href={`https://vk.com/write${friend.id}`}>Написать {notifStatus && ' еще '} сообщение</Link>
           </Div>
         </Group>
